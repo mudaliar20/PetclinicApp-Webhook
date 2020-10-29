@@ -42,19 +42,19 @@ pipeline {
         
      stage('Black duck Scan'){
 	steps {
-       synopsys_detect detectProperties: '''
-       --detect.project.version.name=${BUILD_NUMBER}
-       --detect.project.name="Canada-Application"
-       --detect.source.path=${WORKSPACE}
-       --detect.report.timeout=30000
-       ''', returnStatus: true
+            synopsys_detect detectProperties: '''
+            --detect.project.version.name=${BUILD_NUMBER}
+            --detect.project.name="Canada-Application"
+            --detect.source.path=${WORKSPACE}
+            --detect.report.timeout=30000
+            ''', returnStatus: true
     }
 	} 
 
     
     stage('Build Docker Image'){
 	steps{
-        sh 'docker build -t 3.128.135.88:8083/petclinic:${BUILD_NUMBER} . >&1 | tee SomeFile.txt '
+         sh 'docker build -t 3.128.135.88:8083/petclinic:${BUILD_NUMBER} . >&1 | tee SomeFile.txt '
     }
 	}
         
@@ -69,9 +69,9 @@ pipeline {
     stage('Push Docker Image'){
 	steps{
 	    sh '''
-        docker login -u admin -p admin123 3.128.135.88:8083
-        '''
-         sh 'docker push 3.128.135.88:8083/petclinic:${BUILD_NUMBER} >&1 | tee docker.txt'
+                 docker login -u admin -p admin123 3.128.135.88:8083
+               '''
+            sh 'docker push 3.128.135.88:8083/petclinic:${BUILD_NUMBER} >&1 | tee docker.txt'
      }
 	 }
      
@@ -86,23 +86,22 @@ pipeline {
 	 }
          sh ' rm -rf *.properties'
          sh '''
-        IMAGEID="$(grep "sha256:" demo.txt | cut -c 59-129 | awk '{$1=$1;print}')"
+         IMAGEID="$(grep "sha256:" demo.txt | cut -c 59-129 | awk '{$1=$1;print}')"
          echo "TwislockImageID=${IMAGEID}" >> variable.properties
          IMAGENAME="$(grep "Successfully tagged" SomeFile.txt | cut -d' ' -f 3)"
          echo "TwislockImageName=${IMAGENAME}" >> variable.properties
-         '''
-        	     
+         '''	     
          sh "echo jobName=${env.JOB_NAME} >> variable.properties"
-sh "echo buildNumber=${env.BUILD_NUMBER} >> variable.properties"
-sh "echo repoName=$repoName >> variable.properties"
-sh "echo branchName=$branchName >> variable.properties"
-sh "echo repoURL=$repoURL >> variable.properties"
-sh "echo commitId=${env.GIT_COMMIT} >> variable.properties"
-sh "echo BlackDuckProject=Canada-Application >> variable.properties"
-sh "echo BlackDuckVersion=${env.BUILD_NUMBER} >> variable.properties"
-sh "echo ApplicationName=PetClinicDemoNexus >> variable.properties"
-sh "echo ApplicationProcess=DeployApplication >> variable.properties"
-sh "echo ImgName=3.128.135.88:8083/petclinic:1 >> variable.properties"
+         sh "echo buildNumber=${env.BUILD_NUMBER} >> variable.properties"
+         sh "echo repoName=$repoName >> variable.properties"
+         sh "echo branchName=$branchName >> variable.properties"
+         sh "echo repoURL=$repoURL >> variable.properties"
+         sh "echo commitId=${env.GIT_COMMIT} >> variable.properties"
+         sh "echo BlackDuckProject=Canada-Application >> variable.properties"
+         sh "echo BlackDuckVersion=${env.BUILD_NUMBER} >> variable.properties"
+         sh "echo ApplicationName=PetClinicDemoNexus >> variable.properties"
+         sh "echo ApplicationProcess=DeployApplication >> variable.properties"
+         sh "echo ImgName=3.128.135.88:8083/petclinic:1 >> variable.properties"
 
 
 
