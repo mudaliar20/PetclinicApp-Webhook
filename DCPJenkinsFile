@@ -16,8 +16,6 @@ pipeline {
       def scmVars = checkout([
         $class: 'GitSCM'
       ])
-      echo "env.GIT_COMMIT"
-      echo "${env.GIT_COMMIT}"
     }
        checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'GithubCredentails', url: 'https://github.com/mudaliar20/CanApplication.git']]])
         
@@ -27,10 +25,10 @@ pipeline {
     
     stage(" Maven Clean Package"){
 	steps{
-     // def mavenHome =  tool name: "maven3.6.3", type: "maven"
-     // def mavenCMD = "${mavenHome}/bin/mvn"
-      sh "mvn clean package -DskipTests"
-      sh 'npm install'
+      sh '''
+      mvn clean package -DskipTests
+      npm install
+      '''
       
     } 
 	}
@@ -65,8 +63,8 @@ pipeline {
 	steps{
 	    sh '''
                  docker login -u admin -p admin123 3.128.135.88:8083
+                 docker push 3.128.135.88:8083/petclinic:${BUILD_NUMBER} >&1 | tee docker.txt
                '''
-            sh 'docker push 3.128.135.88:8083/petclinic:${BUILD_NUMBER} >&1 | tee docker.txt'
      }
 	 }
      
