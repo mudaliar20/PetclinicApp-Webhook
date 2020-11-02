@@ -45,28 +45,24 @@ pipeline {
 	} 
 
     
-    stage('Build Docker Image'){
+    stage('Build and Push Docker Image'){
 	steps{
-         sh 'docker build -t 3.128.135.88:8083/petclinic:${BUILD_NUMBER} . >&1 | tee SomeFile.txt '
+         sh '''
+                docker build -t 3.128.135.88:8083/petclinic:${BUILD_NUMBER} . >&1 | tee SomeFile.txt
+                 docker login -u admin -p admin123 3.128.135.88:8083
+                 docker push 3.128.135.88:8083/petclinic:${BUILD_NUMBER} >&1 | tee docker.txt
+               '''
     }
 	}
         
-      /* stage('twislock scan'){
+      stage('twislock scan'){
 	    steps{
 	    sh '''
 	    /home/ubuntu/twistcli images scan --address https://us-east1.cloud.twistlock.com/us-2-158284876 -u edf7a14e-2f5e-4964-b006-48c265f7fc17 -p ehfzcW/0aJL+jkJbcHLE0HlCVO0= 3.128.135.88:8083/petclinic:${BUILD_NUMBER} >&1 | tee demo.txt
 	    '''
 	}
-	} */
-    
-    stage('Push Docker Image'){
-	steps{
-	    sh '''
-                 docker login -u admin -p admin123 3.128.135.88:8083
-                 docker push 3.128.135.88:8083/petclinic:${BUILD_NUMBER} >&1 | tee docker.txt
-               '''
-     }
-	 }
+	} 
+  
      
   
 	
