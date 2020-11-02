@@ -85,16 +85,16 @@ pipeline {
          echo "TwislockImageName=${IMAGENAME}" >> variable.properties
          echo "jobName=${JOB_NAME}" >> variable.properties
          echo "buildNumber=${BUILD_NUMBER}" >> variable.properties
-         echo "repoName=${repoName}" >> variable.properties
-         echo "branchName=${branchName}" >> variable.properties
-         echo "repoURL=$repoURL" >> variable.properties
          echo "commitId=${GIT_COMMIT}" >> variable.properties
          echo "BlackDuckProject=Canada-Application" >> variable.properties
          echo "BlackDuckVersion=${BUILD_NUMBER}" >> variable.properties
          echo "ApplicationName=PetClinicDemoNexus" >> variable.properties
          echo "ApplicationProcess=DeployApplication" >> variable.properties
          echo "ImgName=3.128.135.88:8083/petclinic:1" >> variable.properties
-         '''	     
+         '''	
+         sh "echo repoName=$repoName >> variable.properties"
+         sh "echo branchName=$branchName >> variable.properties"
+         sh "echo repoURL=$repoURL >> variable.properties"
     }
      }
      
