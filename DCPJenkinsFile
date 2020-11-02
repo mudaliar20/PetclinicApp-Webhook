@@ -95,6 +95,12 @@ pipeline {
     }
      }
      
+     //Comment this stage if creating UCD task in DCP for deployment
+    /* stage('Deploy'){
+	    steps{
+	    //Deployment steps to be defined here
+	}
+	} */
     
 }
   
