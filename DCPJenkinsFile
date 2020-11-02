@@ -83,14 +83,14 @@ pipeline {
          echo "TwislockImageID=${IMAGEID}" >> variable.properties
          IMAGENAME="$(grep "Successfully tagged" SomeFile.txt | cut -d' ' -f 3)"
          echo "TwislockImageName=${IMAGENAME}" >> variable.properties
-         echo "jobName=${env.JOB_NAME}" >> variable.properties
-         echo "buildNumber=${env.BUILD_NUMBER}" >> variable.properties
+         echo "jobName=${JOB_NAME}" >> variable.properties
+         echo "buildNumber=${BUILD_NUMBER}" >> variable.properties
          echo "repoName=$repoName" >> variable.properties
          echo "branchName=$branchName" >> variable.properties
          echo "repoURL=$repoURL" >> variable.properties
          echo "commitId=${env.GIT_COMMIT}" >> variable.properties
          echo "BlackDuckProject=Canada-Application" >> variable.properties
-         echo "BlackDuckVersion=${env.BUILD_NUMBER}" >> variable.properties
+         echo "BlackDuckVersion=${BUILD_NUMBER}" >> variable.properties
          echo "ApplicationName=PetClinicDemoNexus" >> variable.properties
          echo "ApplicationProcess=DeployApplication" >> variable.properties
          echo "ImgName=3.128.135.88:8083/petclinic:1" >> variable.properties
