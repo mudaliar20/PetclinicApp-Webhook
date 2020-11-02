@@ -54,14 +54,15 @@ pipeline {
                '''
     }
 	}
-        
-      stage('twislock scan'){
+      
+      //Comment the Twistlock stage if using assessment in DCP
+     /* stage('twislock scan'){
 	    steps{
 	    sh '''
 	    /home/ubuntu/twistcli images scan --address https://us-east1.cloud.twistlock.com/us-2-158284876 -u edf7a14e-2f5e-4964-b006-48c265f7fc17 -p ehfzcW/0aJL+jkJbcHLE0HlCVO0= 3.128.135.88:8083/petclinic:${BUILD_NUMBER} >&1 | tee demo.txt
 	    '''
 	}
-	} 
+	} */
   
      
   
