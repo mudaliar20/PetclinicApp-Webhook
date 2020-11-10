@@ -95,12 +95,13 @@ pipeline {
     }
      }
      
-     //Comment this stage if creating UCD task in DCP for deployment
-    /* stage('Deploy'){
+      stage('Deploy'){
 	    steps{
-	    //Deployment steps to be defined here
+	    script{
+            sh 'curl -X POST -k -u bharata@deloitte.com:Summer2020$ https://cloudply01.kaiburr.com/api/workflow/T1BJavaK8sWorkflow/start'
+            }
 	}
-	} */
+	} 
     
 }
   
