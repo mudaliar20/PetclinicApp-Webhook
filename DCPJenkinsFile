@@ -99,7 +99,7 @@ pipeline {
 	    steps{
 	    script{
             //sh 'curl -X POST -k -u bharata@deloitte.com:Summer2020$ https://cloudply01.kaiburr.com/api/workflow/T1BJavaK8sWorkflow/start'
-            sh 'curl -X POST https://cloudply01.kaiburr.com/api/workflow/T1BJavaK8sWorkflow/start --header 'Authorization: Basic YW1pdHNoYXJtYTM5QGRlbG9pdHRlLmNvbTpGWlZEanZTU2prR3A4WnM=' --header 'Content-Type: application/json' --data-raw '[{"name":"buildNumber","value":"${BUILD_NUMBER}"}]''            
+            sh " curl -X POST https://cloudply01.kaiburr.com/api/workflow/T1BJavaK8sWorkflow/start --header 'Authorization: Basic YW1pdHNoYXJtYTM5QGRlbG9pdHRlLmNvbTpGWlZEanZTU2prR3A4WnM=' --header 'Content-Type: application/json' --data-raw '[{"name":"buildNumber","value":"${BUILD_NUMBER}"}]'"         
             }
 	}
 	} 
