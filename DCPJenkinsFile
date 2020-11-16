@@ -105,7 +105,7 @@ pipeline {
   --header 'Content-Type: application/json' \
   --header 'Authorization: Basic YmhhcmF0YUBkZWxvaXR0ZS5jb206U3VtbWVyMjAyMCQ=' \
   --header 'Cookie: JSESSIONID=Dawtk7V9EcUVyLYe1aJvJLBuqMlynkPbJo_p53Jn.kaiburr-77794dc98d-znr7q' \
-  --body-data '[{"name":"buildNumber","value":"126"}]' \
+  --body-data '[{"name":"buildNumber","value":"${BUILD_NUMBER}"}]' \
    'https://cloudply01.kaiburr.com/api/workflow/T1BJavaK8sWorkflow/start'
         '''
            }
