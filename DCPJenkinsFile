@@ -98,10 +98,16 @@ pipeline {
       stage('Deploy'){
 	    steps{
 	    script{
-            //sh 'curl -X POST -k -u bharata@deloitte.com:Summer2020$ https://cloudply01.kaiburr.com/api/workflow/T1BJavaK8sWorkflow/start'
-          //  sh " curl -X POST https://cloudply01.kaiburr.com/api/workflow/T1BJavaK8sWorkflow/start --header 'Authorization: Basic YW1pdHNoYXJtYTM5QGRlbG9pdHRlLmNvbTpGWlZEanZTU2prR3A4WnM=' --header 'Content-Type: application/json' --data-raw '[{"name":"buildNumber","value":"${BUILD_NUMBER}"}]'"         
-          // sh 'curl -X POST -k -u bharata@deloitte.com:Summer2020$ -d  "buildNumber=${BUILD_NUMBER}" https://cloudply01.kaiburr.com/api/workflow/T1BJavaK8sWorkflow/start '
-           sh 'output=`curl -X POST -d "buildNumber=126" -k -u bharata@deloitte.com:Summer2020$ https://cloudply01.kaiburr.com/api/workflow/T1BJavaK8sWorkflow/start`;echo $output;'
+            sh '''
+                wget --no-check-certificate --quiet \
+  --method POST \
+  --timeout=0 \
+  --header 'Content-Type: application/json' \
+  --header 'Authorization: Basic YmhhcmF0YUBkZWxvaXR0ZS5jb206U3VtbWVyMjAyMCQ=' \
+  --header 'Cookie: JSESSIONID=Dawtk7V9EcUVyLYe1aJvJLBuqMlynkPbJo_p53Jn.kaiburr-77794dc98d-znr7q' \
+  --body-data '[{"name":"buildNumber","value":"126"}]' \
+   'https://cloudply01.kaiburr.com/api/workflow/T1BJavaK8sWorkflow/start'
+        '''
            }
 	}
 	} 
